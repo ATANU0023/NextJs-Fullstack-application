@@ -4,16 +4,7 @@ import Link from "next/link";
 
 export default function Home() {
 
-  const onSignup = async () => {
-    try {
-
-
-      const response = await axios.post("/api/users/signup/");
-    } catch (error: any) {
-      console.log("signup failed", error.message)
-      
-    }
-  }
+  
 
   return (
 
@@ -124,13 +115,7 @@ export default function Home() {
           </p>
         </a>
       </div>
-      <div>
-        <button
-        onClick={onSignup}
-        className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"  >
-          SingUp
-        </button>
-      </div>
+      
       
     </main>
   );
