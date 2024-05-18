@@ -48,7 +48,7 @@ const userSchema = new mongoose.Schema({
     */
     isVerified: {
         type: Boolean,
-        defalult: false
+        default: false
     },
 
     /**
@@ -57,7 +57,7 @@ const userSchema = new mongoose.Schema({
     */
     isAdmin: {
         type: Boolean,
-        defalult: false
+        default: false
     },
 
     /**
@@ -76,7 +76,7 @@ const userSchema = new mongoose.Schema({
  * The `varifyToken` field is of type String.
  * This field could be used to store a token that allows a user to verify their account.
  */
-    varifyToken: String,
+    verifyToken: String,
 
     /**
      * The `verifyTokenExpiry` field is of type Date.

@@ -8,6 +8,7 @@ import { connect } from "@/dbconfig/dbconfig"; // This function is used to conne
 import User from "@/models/userModel"; // This is the Mongoose model for a User.
 import { NextRequest, NextResponse } from "next/server"; // These are types from the Next.js serverless functions API.
 import bcryptjs from 'bcryptjs'; // This library is used for hashing passwords.
+import { sendEmail } from "@/helpers/mailer";
 
 // Connecting to the database.
 connect()
@@ -25,7 +26,7 @@ export async function POST(request: NextRequest) {
         const user = await User.findOne({ email })
         if (user) {
             // If the user already exists, return a 400 error with a message.
-            return NextResponse.json({ error: "User already exists" }, { status: 400 })
+            return NextResponse.json({ error: "User already exists", message:"user already exists" }, { status: 400 })
         }
 
         // Hashing the password.
@@ -42,6 +43,10 @@ export async function POST(request: NextRequest) {
         // Saving the new user to the database.
         const saveUser = await newUser.save()
         console.log(saveUser);
+
+        //send verification email
+        await sendEmail({email, emailType: "VERIFY",userId: saveUser._id})
+
 
         // Returning a success message with the saved user.
         return NextResponse.json({
